@@ -45,15 +45,18 @@ const topMovies = [
     },
 ]
 
-app.use(express.static('public'));
 app.use(morgan('common'));
 
 app.get('/', (req, res) => {
     res.send('Welcome to Movies API!');
-})
+});
 
 app.get('/movies', (req, res) => {
     res.json(topMovies);
+});
+
+app.get('/documentation', (req, res) => {
+    res.sendFile('public/documentation.html', {root: __dirname});
 });
 
 app.use((err, req, res, next) => {
