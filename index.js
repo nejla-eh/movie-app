@@ -229,7 +229,7 @@ app.delete("/users/:username", (req, res) => {
       return obj.username !== user.username;
     });
     console.log(users);
-    res.status(201).send("User" + req.params.id + " was deleted.");
+    res.status(201).send("User" + req.params.username + " was deleted.");
   }
 });
 
