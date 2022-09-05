@@ -159,7 +159,7 @@ app.post("/movies", (req, res) => {
   }
   topMovies.push(newMovie);
   console.log(topMovies);
-  res.status(200).send(`Succesfully added ${newMovie.title}.`);
+  res.status(200).send(`Successfully added ${newMovie.title}.`);
 });
 
 app.delete("/movies", (req, res) => {
@@ -205,7 +205,7 @@ app.post("/users", (req, res) => {
   }
   users.push(newUser);
   console.log(users);
-  res.status(200).send(`Succesfully added ${newUser.username}.`);
+  res.status(200).send(`Successfully added ${newUser.username}.`);
 });
 
 app.put("/users/:username", (req, res) => {
@@ -217,7 +217,7 @@ app.put("/users/:username", (req, res) => {
   }
   user.username = req.body.username;
   console.log(user);
-  res.status(200).send(`Succesfully updated!`);
+  res.status(200).send(`Successfully updated!`);
 });
 
 app.delete("/users/:username", (req, res) => {
