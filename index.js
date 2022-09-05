@@ -162,7 +162,7 @@ app.post("/movies", (req, res) => {
   res.status(200).send(`Successfully added ${newMovie.title}.`);
 });
 
-app.delete("/movies", (req, res) => {
+app.delete("/movies/:title", (req, res) => {
   const movie = topMovies.find((movie) => {
     return movie.title === req.params.title;
   });
