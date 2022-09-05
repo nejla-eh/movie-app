@@ -1,8 +1,26 @@
 const express = require("express");
 const morgan = require("morgan");
+const bodyParser = require("body-parser");
 const app = express();
 
-const topMovies = [
+app.use(bodyParser.json());
+
+let users = [
+  {
+    username: "Nejla",
+  },
+  {
+    username: "John",
+  },
+  {
+    username: "Jane",
+  },
+  {
+    username: "Emma",
+  },
+];
+
+let topMovies = [
   {
     title: "Harry Potter and the Prisoner of Azkaban",
     year: 2004,
@@ -35,7 +53,7 @@ const topMovies = [
     year: 2017,
     genre: "Action, Comedy",
     description:
-      "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+      "Imprisoned on the planet Sakaar, Thor must race against time to return to Asgard and stop Ragnarök, the destruction of his world, at the hands of the powerful and ruthless villain Hela.",
     director: "Taika Waititi",
     image: "#",
   },
@@ -44,7 +62,7 @@ const topMovies = [
     year: 1994,
     genre: "Drama",
     description:
-      "Harry Potter, Ron and Hermione return to Hogwarts School of Witchcraft and Wizardry for their third year of study, where they delve into the mystery surrounding an escaped prisoner who poses a dangerous threat to the young wizard.",
+      "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
     director: "Frank Darabont",
     image: "#",
   },
@@ -112,15 +130,56 @@ app.get("/movies/:title", (req, res) => {
 });
 
 app.post("/movies", (req, res) => {
-  res.send("Add a movie to the list.");
+  let newMovie = req.body;
+  let missingFields = [];
+  console.log(newMovie);
+  if (!newMovie.title) {
+    missingFields.push("title");
+  }
+  if (!newMovie.year) {
+    missingFields.push("year");
+  }
+  if (!newMovie.genre) {
+    missingFields.push("genre");
+  }
+  if (!newMovie.description) {
+    missingFields.push("description");
+  }
+  if (!newMovie.director) {
+    missingFields.push("director");
+  }
+  if (missingFields.length > 0) {
+    res
+      .status(400)
+      .send(
+        `Missing ${
+          missingFields.length > 1 ? missingFields.join(", ") : missingFields[0]
+        }.`
+      );
+  }
+  topMovies.push(newMovie);
+  console.log(topMovies);
+  res.status(200).send(`Succesfully added ${newMovie.title}.`);
 });
 
 app.delete("/movies", (req, res) => {
-  res.send("Delete a movie from the list.");
+  const movie = topMovies.find((movie) => {
+    return movie.title === req.params.title;
+  });
+  if (movie) {
+    topMovies = topMovies.filter((m) => {
+      return m.title !== movie.title;
+    });
+    console.log(topMovies);
+    res.status(201).send("Movie" + movie.title + " was deleted.");
+  }
 });
 
 app.get("/genres/:genre", (req, res) => {
-  res.send("Movie genre.");
+  const moviesByGenre = topMovies.filter(
+    (movie) => movie.genre === req.params.genre
+  );
+  res.status(200).json(moviesByGenre);
 });
 
 app.get("/directors/", (req, res) => {
@@ -140,15 +199,38 @@ app.get("/directors/:director", (req, res) => {
 });
 
 app.post("/users", (req, res) => {
-  res.send("New user added.");
+  const newUser = req.body;
+  if (!newUser.username) {
+    res.status(400).send(`Missing ${newUser.username}.`);
+  }
+  users.push(newUser);
+  console.log(users);
+  res.status(200).send(`Succesfully added ${newUser.username}.`);
 });
 
 app.put("/users/:username", (req, res) => {
-  res.send("Username updated.");
+  const user = users.find((user) => {
+    return user.username === req.params.username;
+  });
+  if (!user) {
+    res.status(400).send(`User not found.`);
+  }
+  user.username = req.body.username;
+  console.log(user);
+  res.status(200).send(`Succesfully updated!`);
 });
 
 app.delete("/users/:username", (req, res) => {
-  res.send("User deleted.");
+  const user = users.find((user) => {
+    return user.username === req.params.username;
+  });
+  if (user) {
+    users = users.filter((obj) => {
+      return obj.username !== user.username;
+    });
+    console.log(users);
+    res.status(201).send("User" + req.params.id + " was deleted.");
+  }
 });
 
 app.get("/documentation", (req, res) => {
