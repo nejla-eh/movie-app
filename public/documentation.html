@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Movie API</title>
+    <link rel="stylesheet" href="documentation.css">
 </head>
 
 <body>
@@ -19,84 +20,203 @@
         <div class="endpoint">
             <h2 class="endpoint-title">List all movies</h2>
             <span class="endpoint-method">GET</span>
-            <span class="endpoint-url">/movies</span>
+            <code class="endpoint-url">/movies</code>
             <span class="endpoint-request">none</span>
             <p class="endpoint-response">A JSON object holding data
-                about all the movies</p>
+                about all the movies
+            <pre>
+[{
+    ID: Integer,
+    Title: String,
+    Description: String,
+    Genre: String,
+    Director: String,
+    ImagePath: String,
+    Featured: Boolean
+}]        
+                </pre>
+            </p>
         </div>
         <div class="endpoint">
             <h2 class="endpoint-title">Get a movie</h2>
             <span class="endpoint-method">GET</span>
-            <span class="endpoint-url">/movies/[Title]</span>
+            <code class="endpoint-url">/movies/[Title]</code>
             <span class="endpoint-request">none</span>
-            <p class="endpoint-response">A JSON object holding data
-                about a single movie
-            <pre>
-                {
-                "title": "Thor: Ragnarok",
-                "year": 2017,
-                }
-            </pre>
-            </p>
+            <p class="endpoint-response">The Movie title in the URL</p>
         </div>
         <div class="endpoint">
             <h2 class="endpoint-title">Add a movie</h2>
             <span class="endpoint-method">POST</span>
-            <span class="endpoint-url">/movies</span>
-            <span class="endpoint-request">A JSON object holding data about the movie to be added</span>
+            <code class="endpoint-url">/movies</code>
+            <p class="endpoint-request">A JSON object holding data about the movie to be added
+            <pre>
+{
+    Title: String,
+    Description: String,
+    Genre: String,
+    Director: String,
+    ImagePath: String
+}
+            </pre>
+            </p>
             <p class="endpoint-response">A JSON object holding data
-                about an added movie</p>
+                about an added movie
+            <pre>
+{
+    ID: Integer,
+    Title: String,
+    Description: String,
+    Genre: String,
+    Director: String,
+    ImagePath: String,
+    Featured: Boolean
+}
+            </pre>
+            </p>
         </div>
         <div class="endpoint">
             <h2 class="endpoint-title">Remove a movie</h2>
             <span class="endpoint-method">DELETE</span>
-            <span class="endpoint-url">/movies/[Title]</span>
-            <span class="endpoint-request">none</span>
+            <code class="endpoint-url">/movies/[Title]</code>
+            <p class="endpoint-request">The Movie title in the URL</p>
             <p class="endpoint-response">A message indicating
-                whether the movie was successfully removed</p>
+                whether the movie was successfully removed
+            <pre>
+{
+    ID: Integer,
+    Title: String,
+    Description: String,
+    Genre: String,
+    Director: String,
+    ImagePath: String,
+    Featured: Boolean
+}
+                </pre>
+            </p>
         </div>
         <div class="endpoint">
             <h2 class="endpoint-title">Get a genre</h2>
             <span class="endpoint-method">GET</span>
-            <span class="endpoint-url">/genres/[Genre]</span>
-            <span class="endpoint-request">none</span>
+            <code class="endpoint-url">/genres/[Genre]</code>
+            <p class="endpoint-request">The Genre name in the URL</p>
             <p class="endpoint-response">A JSON object holding data
-                about a genre</p>
+                about a genre
+            <pre>
+{
+    Name: String,
+    Description: String,
+}
+            </pre>
+            </p>
         </div>
         <div class="endpoint">
             <h2 class="endpoint-title">Get a director</h2>
             <span class="endpoint-method">GET</span>
-            <span class="endpoint-url">/directors/[Director]</span>
+            <code class="endpoint-url">/directors/[Director]</code>
+            <p class="endpoint-request">The Directors name in the URL</p>
+            <p class="endpoint-response">A JSON object holding data
+                about a director
+            <pre>
+{
+    Name: String,
+    Bio: String,
+}
+            </pre>
+            </p>
+        </div>
+        <div class="endpoint">
+            <h2 class="endpoint-title">List all users</h2>
+            <span class="endpoint-method">GET</span>
+            <code class="endpoint-url">/users</code>
             <span class="endpoint-request">none</span>
             <p class="endpoint-response">A JSON object holding data
-                about a director</p>
+                about all users
+            <pre>
+[{
+    Username: String,
+    Password: String,
+    Email: String,
+    Birthday: Date,
+    FavouriteMovies: [Movie]
+}]        
+                </pre>
+            </p>
         </div>
         <div class="endpoint">
             <h2 class="endpoint-title">Create a new user</h2>
             <span class="endpoint-method">POST</span>
-            <span class="endpoint-url">/users</span>
-            <span class="endpoint-request">A JSON object holding data about the new user</span>
+            <code class="endpoint-url">/users</code>
+            <p class="endpoint-request">A JSON object holding data about the new user:
+            <pre>
+{
+    Username: String,
+    Password: String,
+    Email: String,
+    Birthday: Date,
+    FavouriteMovies: [Movie]
+}
+                </pre>
+            </p>
             <p class="endpoint-response">A JSON object holding data
-                about a registered user</p>
+                about a registered user
+            <pre>
+{
+    ID: Integer,
+    Username: String,
+    Password: String,
+    Email: String,
+    Birthday: Date,
+    FavouriteMovies: [Movie]
+}
+            </pre>
+            </p>
         </div>
         <div class="endpoint">
             <h2 class="endpoint-title">Update an user</h2>
             <span class="endpoint-method">PUT</span>
-            <span class="endpoint-url">/users/[Username]</span>
-            <span class="endpoint-request">none</span>
-            <p class="endpoint-response">A text message indicating
-                the updated username</p>
+            <code class="endpoint-url">/users/[Username]</code>
+            <p class="endpoint-request">The Username in the URL
+            </p>
+            <p class="endpoint-response">A JSON object holding data
+                of the updated user
+            <pre>
+{
+    Username: String,
+    Password: String,
+    Email: String,
+    Birthday: Date,
+    FavouriteMovies: [Movie],
+}
+            </pre>
+            </p>
         </div>
         <div class="endpoint">
             <h2 class="endpoint-title">Delete an user</h2>
             <span class="endpoint-method">DELETE</span>
-            <span class="endpoint-url">/users/[Username]</span>
-            <span class="endpoint-request">none</span>
+            <code class="endpoint-url">/users/[Username]</code>
+            <p class="endpoint-request">The Username in the URL</p>
             <p class="endpoint-response">A message indicating
                 whether the user was successfully deregistered</p>
         </div>
+        <div class="endpoint">
+            <h2 class="endpoint-title">Add a movie to the user's list of favorite movies</h2>
+            <span class="endpoint-method">POST</span>
+            <code class="endpoint-url">/users/[Username]/movies/[MovieID]</code>
+            <p class="endpoint-request">The Username and MovieID in the URL</p>
+            <p class="endpoint-response">A JSON object holding data
+                of the updated user
+            <pre>
+{
+    Username: String,
+    Password: String,
+    Email: String,
+    Birthday: Date,
+    FavouriteMovies: [Movie],
+}
+            </pre>
+            </p>
+        </div>
     </div>
-
 </body>
 
 </html>
