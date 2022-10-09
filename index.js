@@ -336,6 +336,7 @@ app.delete("/users/:Username/movies/:MovieID", (req, res) => {
     {
       $pull: { FavoriteMovies: req.params.MovieID },
     },
+    { new: true },
     (err, updatedUser) => {
       if (err) {
         console.error(err);
