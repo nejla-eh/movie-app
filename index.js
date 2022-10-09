@@ -343,7 +343,6 @@ app.delete(
       {
         $pull: { FavoriteMovies: req.params.MovieID },
       },
-      { new: true },
       (err, updatedUser) => {
         if (err) {
           console.error(err);
