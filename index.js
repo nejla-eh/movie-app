@@ -24,7 +24,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("common"));
 const cors = require("cors");
-const allowedOrigins = ["http://localhost:1234"];
+const allowedOrigins = [
+  "http://localhost:1234",
+  "https://my-flix-nejla.netlify.app/",
+];
 
 app.use(
   cors({
