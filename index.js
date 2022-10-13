@@ -26,7 +26,7 @@ app.use(morgan("common"));
 const cors = require("cors");
 const allowedOrigins = [
   "http://localhost:1234",
-  "https://my-flix-nejla.netlify.app/",
+  "https://my-flix-nejla.netlify.app",
 ];
 
 app.use(
