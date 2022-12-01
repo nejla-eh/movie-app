@@ -20,12 +20,15 @@ mongoose.connect(process.env.CONNECTION_URI, {
   useUnifiedTopology: true,
 });
 
+const ANGULAR_LOCAL_APP = "http://localhost:4200";
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan("common"));
 const cors = require("cors");
 const allowedOrigins = [
   "http://localhost:1234",
+  ANGULAR_LOCAL_APP,
   "https://my-flix-nejla.netlify.app",
 ];
 
