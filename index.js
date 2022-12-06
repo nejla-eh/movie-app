@@ -30,6 +30,7 @@ const allowedOrigins = [
   "http://localhost:1234",
   ANGULAR_LOCAL_APP,
   "https://my-flix-nejla.netlify.app",
+  "https://nejla-eh.github.io/myFlix-Angular-client",
 ];
 
 app.use(
